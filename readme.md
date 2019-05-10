@@ -122,7 +122,7 @@ console.log(pos.x);
 setTimeout(() => console.log(pos.x), 1000);
 ```
 
-## `pos.x` Read the value
+### `pos.x` Read the value
 
 You can read the value at any time:
 
