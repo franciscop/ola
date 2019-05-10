@@ -29,7 +29,7 @@ It works with multiple values/dimensions:
 // Initialize it to origin
 const pos = Ola({ x: 0, y: 0 });
 
-// Set both values to 100
+// Set both values to 100 (async)
 pos.set({ x: 100, y: 100 });
 
 // Log how the values evolve
