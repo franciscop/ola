@@ -2,7 +2,9 @@
 
 A smooth interpolation library for Javascript numbers:
 
-<img align="right" width="375" height="180" src="./docs/line.gif">
+<a href="https://jsfiddle.net/franciscop/oechmra8/" target="_blank">
+  <img align="right" width="375" height="180" src="./docs/line.gif">
+</a>
 
 ```js
 // Initialize it to 0
@@ -17,7 +19,9 @@ setInterval(() => console.log(temp.value), 10);
 
 It works with multiple values/dimensions:
 
-<img align="right" width="375" height="180" src="./docs/ball.gif">
+<a href="https://jsfiddle.net/franciscop/oLw01smr/" target="_blank">
+  <img align="right" width="375" height="180" src="./docs/ball.gif">
+</a>
 
 ```js
 // Initialize it to origin
