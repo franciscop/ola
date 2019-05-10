@@ -3,7 +3,7 @@
 A smooth interpolation library for Javascript numbers:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/" target="_blank">
-  <img align="right" width="375" height="180" src="./docs/line.gif">
+  <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
 </a>
 
 ```js
@@ -13,14 +13,16 @@ const temp = Ola(0);
 // Set the value randomly (async)
 temp.set(100);
 
-// Log how the value evolves from 0 to 100
-setInterval(() => console.log(temp.value), 10);
+// Log the values from 0 to 100
+setInterval(() => {
+  console.log(temp.value);
+}, 10);
 ```
 
 It works with multiple values/dimensions:
 
 <a href="https://jsfiddle.net/franciscop/oLw01smr/" target="_blank">
-  <img align="right" width="375" height="180" src="./docs/ball.gif">
+  <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/ball.gif">
 </a>
 
 ```js
@@ -31,7 +33,9 @@ const pos = Ola({ x: 0, y: 0 });
 pos.set({ x: 100, y: 100 });
 
 // Log how the values evolve
-setInterval(() => console.log(pos.x, pos.y), 10);
+setInterval(() => {
+  console.log(pos.x, pos.y);
+}, 10);
 ```
 
 > Tip: click on any GIF for the full code used to create it :)
