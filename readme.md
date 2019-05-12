@@ -196,9 +196,9 @@ With other libraries when updating a value **while the previous transition is st
 
 Status of libraries updating animation mid-way:
 
-- Ola.js (this) - working smoothly, see above.
-- TweenMax - Supported natively, but the transition is. See screenshot above.
-- Tween.js - Proposed API, but not implemented: https://github.com/tweenjs/tween.js/issues/257
+- **Ola.js** - working smoothly, see screenshot above.
+- **TweenMax** - Supported natively, but the transition is. See screenshot above.
+- **Tween.js** - Proposed API, but not implemented: https://github.com/tweenjs/tween.js/issues/257
 - [**Open an Issue**](https://github.com/franciscop/ola/issues/new) with other libraries that you know.
 
 ### Lazy loading
