@@ -186,7 +186,7 @@ With other libraries when updating a value **while the previous transition is st
   </tr>
   <tr>
     <td>
-      Broken interpolation <strong>without Ola()</strong>
+      Broken interpolation <strong>with Tweenmax</strong>
     </td>
     <td>
       Smooth interpolation <strong>with Ola()</strong>
