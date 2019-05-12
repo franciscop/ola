@@ -1,6 +1,6 @@
 {
   "name": "ola",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "A smooth interpolation library for Javascript numbers",
   "main": "ola.min.js",
   "scripts": {
