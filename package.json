@@ -1,7 +1,7 @@
 {
   "name": "ola",
   "version": "0.3.3",
-  "description": "A smooth interpolation library",
+  "description": "A smooth interpolation library for Javascript numbers",
   "main": "ola.min.js",
   "scripts": {
     "build": "rollup ola.js --name Ola --output.format umd | uglifyjs -o ola.min.js",

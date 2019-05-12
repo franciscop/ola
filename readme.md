@@ -111,7 +111,7 @@ pos.set({ x: 100 });
 
 > Note: this update time is likely to change in the future
 
-### `pos.x = 10` Update the value
+### `pos.set({ x: 10 })` Update the value
 
 When we update a property **it is not updated instantaneously** (that's the whole point of this library), but instead it's set to update asynchronously:
 
@@ -125,6 +125,12 @@ console.log(pos.x);
 // 100 - after 300ms it's fully updated
 setTimeout(() => console.log(pos.x), 1000);
 ```
+
+You can see in this graph, the blue line is the value that is set though `.set()`, while the red line is the value that reading it returns:
+
+<a href="https://jsfiddle.net/franciscop/oechmra8/">
+  <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
+</a>
 
 ### `pos.x` Read the value
 
@@ -144,7 +150,9 @@ Every time it is read, it'll calculate it based in the current time. So there's 
 
 ## Smooth interpolation
 
-When updating a value **while another transition is occurring**, the naive interpolation would either bump the value or make a tight turn. We are taking the position derivative at x_i for the new curve so any update happen smoothly:
+If you use other libraries like TWEEN and try to update a value **while the previous transition is still ongoing** you are going to have a hard time.
+
+We are taking the position derivative at x_i for the new curve so any update happen smoothly:
 
 <table>
   <tr>
