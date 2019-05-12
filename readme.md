@@ -163,10 +163,10 @@ If you use other libraries like TWEEN and try to update a value **while the prev
   </tr>
   <tr>
     <td>
-      Naive implementation with corners
+      Broken interpolation **without Ola()**
     </td>
     <td>
-      Smooth interpolation with Ola()
+      Smooth interpolation **with Ola()**
     </td>
   </tr>
 </table>
