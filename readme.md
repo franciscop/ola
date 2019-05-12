@@ -129,7 +129,7 @@ setTimeout(() => console.log(pos.x), 1000);
 You can see in this graph, the blue line is the value that is set though `.set()`, while the red line is the value that reading it returns:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
-  <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
+  <img width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
 </a>
 
 ### `pos.x` Read the value
