@@ -178,18 +178,18 @@ With other libraries when updating a value **while the previous transition is st
 <table>
   <tr>
     <td>
-      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/smooth_tweenmax.png">
+      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/smooth_ola.png">
     </td>
     <td>
-      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/smooth_ola.png">
+      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/smooth_tweenmax.png">
     </td>
   </tr>
   <tr>
     <td>
-      Broken interpolation <strong>with Tweenmax</strong>
+      Smooth interpolation <strong>with Ola()</strong>
     </td>
     <td>
-      Smooth interpolation <strong>with Ola()</strong>
+      Broken interpolation <strong>with Tweenmax</strong>
     </td>
   </tr>
 </table>
