@@ -2,7 +2,7 @@
 
 A smooth interpolation library for Javascript numbers:
 
-<a href="https://jsfiddle.net/franciscop/oechmra8/" target="_blank">
+<a href="https://jsfiddle.net/franciscop/oechmra8/">
   <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
 </a>
 
@@ -21,7 +21,7 @@ setInterval(() => {
 
 It works with multiple values/dimensions:
 
-<a href="https://jsfiddle.net/franciscop/oLw01smr/" target="_blank">
+<a href="https://jsfiddle.net/franciscop/oLw01smr/">
   <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/ball.gif">
 </a>
 
@@ -38,7 +38,7 @@ setInterval(() => {
 }, 10);
 ```
 
-> Tip: click on any GIF for the full code used to create it :)
+> Tip: click on the GIFs for a live demo with the code :)
 
 ## Getting started
 
@@ -141,3 +141,20 @@ setInterval(() => {
 ```
 
 Every time it is read, it'll calculate it based in the current time. So there's _no need to update it_ manually.
+
+## Smooth interpolation
+
+By doing the math, we could fix a very common problem: when updating a value **while another transition is occuring**, the naive interpolation would either bump the value or make a tight turn. We are taking the position derivative (speed) and using that for the new curve so any update happen smoothly:
+
+<table>
+  <tr>
+    <td>
+      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.gif">
+      Naive implementation of the curve
+    </td>
+    <td>
+      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.gif">
+      Smooth interpolation with Ola()
+    </td>
+  </tr>
+</table>

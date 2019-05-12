@@ -1,62 +1,71 @@
-// https://gist.github.com/gre/1650294
-const timings = {
-  linear: t => t,
-  easeInQuad: t => t * t,
-  easeOutQuad: t => t * (2 - t),
-  easeInOutQuad: t => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
-  easeInCubic: t => t * t * t,
-  easeOutCubic: t => --t * t * t + 1,
-  easeInOutCubic: t =>
-    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
-  easeInQuart: t => t * t * t * t,
-  easeOutQuart: t => 1 - --t * t * t * t,
-  easeInOutQuart: t => (t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t),
-  easeInQuint: t => t * t * t * t * t,
-  easeOutQuint: t => 1 + --t * t * t * t * t,
-  easeInOutQuint: t =>
-    t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t
-};
-
 // Handle a single dimension
-function Single(init, time, timing) {
-  this.start = new Date();
+function Single(init, time) {
+  this.start = new Date() / 1000;
   this.time = time;
-  this.timing = typeof timing === "string" ? timings[timing] : timing;
   this.from = init;
   this.current = init;
   this.to = init;
+  this.speed = 0;
 }
 
-Single.prototype.get = function() {
-  const t = Math.min((new Date() - this.start) / this.time, 1);
-  const perc = this.timing(t);
-  this.current = this.from + (this.to - this.from) * perc;
-  return this.current;
+// const x_const = (x0, v0, t1, t) => {
+//   const a = (2 * x0) / t1 ** 3;
+//   const b = -(3 * x0) / t1 ** 2;
+//   const c = 0;
+//   const d = x0;
+//   return a * t ** 3 + b * t ** 2 + c * t + d;
+// };
+
+const position = (x0, v0, t1, t) => {
+  const a = (v0 * t1 + 2 * x0) / t1 ** 3;
+  const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
+  const c = v0;
+  const d = x0;
+  return a * t ** 3 + b * t ** 2 + c * t + d;
 };
 
-Single.prototype.set = function(value, time, timing) {
+const speed = (x0, v0, t1, t) => {
+  const a = (v0 * t1 + 2 * x0) / t1 ** 3;
+  const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
+  const c = v0;
+  const d = x0;
+  return 3 * a * t ** 2 + 2 * b * t + c;
+};
+
+Single.prototype.get = function() {
+  const t = new Date() / 1000 - this.start;
+  if (t >= this.time) {
+    return this.to;
+  }
+  return this.to - position(this.to - this.from, this.speed, this.time, t);
+};
+
+Single.prototype.getSpeed = function() {
+  const t = new Date() / 1000 - this.start;
+  if (t >= this.time) {
+    return 0;
+  }
+  return speed(this.to - this.from, this.speed, this.time, t);
+};
+
+Single.prototype.set = function(value, time) {
   const current = this.get();
-  this.start = new Date();
+  this.speed = this.getSpeed();
+  this.start = new Date() / 1000;
   this.from = current;
   this.to = value;
-  if (time) {
-    this.time = time;
-  }
-  if (timing) {
-    this.timing = typeof timing === "string" ? timings[timing] : timing;
-  }
   return current;
 };
 
 // The multidimensional constructor, makes a { value: init } if it's 1D
-function Ola(values, time = 300, timing = "easeInOutQuad") {
+function Ola(values, time = 300) {
   if (!(this instanceof Ola)) {
-    return new Ola(values, time, timing);
+    return new Ola(values, time);
   }
 
   // Loop over the first argument
   this.each(values, (init, key) => {
-    const value = new Single(init, time, timing);
+    const value = new Single(init, time / 1000);
     // But we are not interested in it; instead, set it as a ghost
     Object.defineProperty(this, "_" + key, { value });
     Object.defineProperty(this, key, {
