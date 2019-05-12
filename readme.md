@@ -149,11 +149,11 @@ By doing the math, we could fix a very common problem: when updating a value **w
 <table>
   <tr>
     <td>
-      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.gif">
+      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.png">
       Naive implementation of the curve
     </td>
     <td>
-      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.gif">
+      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.png">
       Smooth interpolation with Ola()
     </td>
   </tr>
