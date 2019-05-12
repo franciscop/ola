@@ -1,6 +1,6 @@
 # Ola
 
-A smooth interpolation library for Javascript numbers:
+Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics) numbers:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
   <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
@@ -70,20 +70,31 @@ If you prefer to use a CDN:
 
 There are three distinct operations that can be run: creating an instance, setting it to update and reading it.
 
-### `Ola({ x: 0 }, t)` Create an instance
+### Create an instance
+
+```js
+Ola(initial_value, (time = 300));
+```
 
 The first parameter is the initial value. It can be either a single number, or an object of `key:numbers`:
 
 ```js
-const tmp = Ola(0); // Alias of `{ value: 0 }`
-const pos = Ola({ x: 0 });
+const heater = Ola(20); // Alias of `{ value: 0 }`
+const motor = Ola({ angle: 180 }); // A named object for convenience
+const position = Ola({ x: 0, y: 0 }); // Any number of properties
 ```
 
-Using a single number is the shortname of using the key `value`. It is offered for convenience, but recommend not mixing both styles in the same project.
+The second parameter is how long the transition will last. It should be a number that represents the time in milliseconds:
 
-The second parameter is how long each update will take in ms.
+```js
+const heater = Ola(20, 300); // Default = 300 ms
+const motor = Ola({ angle: 180 }, 1000); // Turn the motor slowly
+const position = Ola({ x: 0, y: 0 }, 100); // Very quick movements
+```
 
-It works with any kind of float:
+Passing a single number as a parameter is the same as passing `{ value: num }`, we are just helping by setting a shortname. It is offered for convenience, but recommend not mixing both styles in the same project.
+
+It works with Javascript numbers, but please keep things reasonable (under `Number.MAX_VALUE / 10`):
 
 ```js
 console.log(Ola(100));
@@ -92,26 +103,21 @@ console.log(Ola(0.001));
 console.log(Ola(1 / 100));
 ```
 
-The keys can be any string you prefer, and the instances can be logged as usual:
-
-```js
-console.log(Ola({ abcd: 100 })); // { abcd: 100 }
-JSON.stringify(Ola({ a: 100 })); // '{"a":100}'
-```
-
-> Note: try to keep it safe, so keep your numbers under Number.MAX_VALUE / 10
-
-The time it takes to update can be defined per instance:
+The time it takes to update can also be updated while setting the value:
 
 ```js
 // All `pos.set()` will take 1 full second
 const pos = Ola({ x: 0 }, 1000);
-pos.set({ x: 100 });
+pos.set({ x: 100 }, 3000);
 ```
 
-> Note: this update time is likely to change in the future
+### Update the value
 
-### `pos.set({ x: 10 })` Update the value
+```js
+heater.value = 25; // Since the constructor used a number, use `.value`
+motor.angle = 90; // Turn -90 degrees
+position.set({ x: 100, y: 100 }); // Move 0,0 => 100,100
+```
 
 When we update a property **it is not updated instantaneously** (that's the whole point of this library), but instead it's set to update asynchronously:
 
@@ -126,15 +132,28 @@ console.log(pos.x);
 setTimeout(() => console.log(pos.x), 1000);
 ```
 
+Remember that if you set the value as `Ola(10)`, this is really an alias for `Ola({ value: 10 })`, so use the property `.value` to update it:
+
+```js
+heater.value = 25;
+heater.set({ value: 25 });
+```
+
 You can see in this graph, the blue line is the value that is set though `.set()`, while the red line is the value that reading it returns:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
   <img width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
 </a>
 
-### `pos.x` Read the value
+### Read the value
 
-You can read the value at any time:
+```js
+log(heater.value); // Since the constructor used a number, use `.value`
+log(motor.angle); // Read as an object property
+log(position.get("x")); // Find the X value
+```
+
+You can read the value at any time, and the value will be calculated at that moment in time:
 
 ```js
 const pos = Ola({ x: 0 });
@@ -146,19 +165,23 @@ setInterval(() => {
 }, 10);
 ```
 
-Every time it is read, it'll calculate it based in the current time. So there's _no need to update it_ manually.
+In contrast to other libraries, there's no need to tick/update the function every N ms or before reading the value, since `Ola()` uses math functions you should just read it when needed.
+
+## Features
+
+While there are some other great libraries like Tween, this one has some improvements:
 
 ## Smooth interpolation
 
-If you use other libraries like TWEEN and try to update a value **while the previous transition is still ongoing** you are going to have a hard time. We are taking the position derivative (speed) at the update time so they happen smoothly:
+With other libraries when updating a value **while the previous transition is still ongoing** you are going to have a hard time. We are taking the position derivative (speed) at the update time so they happen smoothly:
 
 <table>
   <tr>
     <td>
-      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.png">
+      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/smooth_tweenmax.png">
     </td>
     <td>
-      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_ola.png">
+      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/smooth_ola.png">
     </td>
   </tr>
   <tr>
@@ -170,3 +193,15 @@ If you use other libraries like TWEEN and try to update a value **while the prev
     </td>
   </tr>
 </table>
+
+## Lazy loading
+
+Since this is driven by mathematical equations, the library doesn't calculate any value until it needs to be read/updated. It will also _only_ change the one we need instead of all of the values:
+
+```js
+const position = Ola({ x: 0, y: 0 });
+position.x = 10; // Only updates X
+console.log(position.x); // Calculates only X position, not y
+```
+
+Not only this is great for performance, but it also makes for a clean self-contained API where each instance is independent.

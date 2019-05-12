@@ -1,3 +1,22 @@
+// Calculate the position based on the current position, speed and time:
+//  https://www.wolframalpha.com/input/?i=x+%3D+2+*+t+%5E+3+-+3+*+t+%5E+2+%2B+1+from+t+%3D+0+to+t+%3D+1
+const position = (x0, v0, t1, t) => {
+  const a = (v0 * t1 + 2 * x0) / t1 ** 3;
+  const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
+  const c = v0;
+  const d = x0;
+  return a * t ** 3 + b * t ** 2 + c * t + d;
+};
+
+// Calculate the speed based on the current position, speed and time:
+const speed = (x0, v0, t1, t) => {
+  const a = (v0 * t1 + 2 * x0) / t1 ** 3;
+  const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
+  const c = v0;
+  const d = x0;
+  return 3 * a * t ** 2 + 2 * b * t + c;
+};
+
 // Handle a single dimension
 function Single(init, time) {
   this.start = new Date() / 1000;
@@ -7,30 +26,6 @@ function Single(init, time) {
   this.to = init;
   this.speed = 0;
 }
-
-// const x_const = (x0, v0, t1, t) => {
-//   const a = (2 * x0) / t1 ** 3;
-//   const b = -(3 * x0) / t1 ** 2;
-//   const c = 0;
-//   const d = x0;
-//   return a * t ** 3 + b * t ** 2 + c * t + d;
-// };
-
-const position = (x0, v0, t1, t) => {
-  const a = (v0 * t1 + 2 * x0) / t1 ** 3;
-  const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
-  const c = v0;
-  const d = x0;
-  return a * t ** 3 + b * t ** 2 + c * t + d;
-};
-
-const speed = (x0, v0, t1, t) => {
-  const a = (v0 * t1 + 2 * x0) / t1 ** 3;
-  const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
-  const c = v0;
-  const d = x0;
-  return 3 * a * t ** 2 + 2 * b * t + c;
-};
 
 Single.prototype.get = function() {
   const t = new Date() / 1000 - this.start;
@@ -54,6 +49,9 @@ Single.prototype.set = function(value, time) {
   this.start = new Date() / 1000;
   this.from = current;
   this.to = value;
+  if (time) {
+    this.time = time;
+  }
   return current;
 };
 
@@ -84,9 +82,9 @@ Ola.prototype.get = function(name = "value") {
 // pos.set(10)
 // pos.set({ x: 10 })
 // pos.set({ x: 10 }, time)
-Ola.prototype.set = function(values, ...args) {
+Ola.prototype.set = function(values, time) {
   this.each(values, (value, key) => {
-    this["_" + key].set(value, ...args);
+    this["_" + key].set(value, time);
   });
 };
 
