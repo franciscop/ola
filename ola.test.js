@@ -1,13 +1,13 @@
 import Ola from "./ola";
 
 const delay = (time = 300) => new Promise(done => setTimeout(done, time));
-const roundish = (num, dec = 1) => dec * Math.round(num / dec);
+
+// 10% of approximation by default
 expect.extend({
-  // 10% of approximation by default
   toApproximate: (a, b, perc = 0.1) => {
     const pass = Math.abs((a - b) / b) <= perc;
     return {
-      pass: pass,
+      pass,
       message: () => `"${a}" ${pass ? "should" : "does not"} approximate "${b}"`
     };
   }
