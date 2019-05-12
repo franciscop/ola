@@ -1,6 +1,6 @@
 {
   "name": "ola",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "Smooth animation library for inbetweening numbers in Javascript",
   "main": "ola.min.js",
   "scripts": {
