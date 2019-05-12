@@ -144,16 +144,22 @@ Every time it is read, it'll calculate it based in the current time. So there's 
 
 ## Smooth interpolation
 
-By doing the math, we could fix a very common problem: when updating a value **while another transition is occuring**, the naive interpolation would either bump the value or make a tight turn. We are taking the position derivative (speed) and using that for the new curve so any update happen smoothly:
+When updating a value **while another transition is occurring**, the naive interpolation would either bump the value or make a tight turn. We are taking the position derivative at x_i for the new curve so any update happen smoothly:
 
 <table>
   <tr>
     <td>
-      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.png">
+      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.png">
+    </td>
+    <td>
+      <img src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_ola.png">
+    </td>
+  </tr>
+  <tr>
+    <td>
       Naive implementation of the curve
     </td>
     <td>
-      <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/common_error_others.png">
       Smooth interpolation with Ola()
     </td>
   </tr>
