@@ -171,7 +171,7 @@ In contrast to other libraries, there's no need to tick/update the function ever
 
 While there are some other great libraries like Tween, this one has some improvements:
 
-## Smooth interpolation
+### Smooth interpolation
 
 With other libraries when updating a value **while the previous transition is still ongoing** you are going to have a hard time. We are taking the position derivative (speed) at the update time so they happen smoothly:
 
@@ -200,7 +200,7 @@ Status of other libraries:
 - TweenMax - Not smooth at all, [see screenshot](./docs/smooth_tweenmax.png).
 - [**Open an Issue**](https://github.com/franciscop/ola/issues/new) with other libraries that you know.
 
-## Lazy loading
+### Lazy loading
 
 Since this is driven by mathematical equations, the library doesn't calculate any value until it needs to be read/updated. It will also _only_ change the one we need instead of all of the values:
 
