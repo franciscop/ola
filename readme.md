@@ -194,6 +194,12 @@ With other libraries when updating a value **while the previous transition is st
   </tr>
 </table>
 
+Status of other libraries:
+
+- Tween.js - Proposed, not implemented: https://github.com/tweenjs/tween.js/issues/257
+- TweenMax - Not smooth at all, [see screenshot](./docs/smooth_tweenmax.png).
+- [**Open an Issue**](https://github.com/franciscop/ola/issues/new) with other libraries that you know.
+
 ## Lazy loading
 
 Since this is driven by mathematical equations, the library doesn't calculate any value until it needs to be read/updated. It will also _only_ change the one we need instead of all of the values:
