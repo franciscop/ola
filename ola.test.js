@@ -112,12 +112,3 @@ describe("Ola({ x: 0 })", () => {
     expect(JSON.stringify(pos)).toBe('{"x":100}');
   });
 });
-
-describe.skip("Ola(..., time, timing)", () => {
-  it("can update with second parameter", async () => {
-    const pos = Ola({ x: 0 });
-    pos.set({ x: 100 }, 600);
-    await delay();
-    expect(pos.x).toApproximate(50);
-  });
-});
