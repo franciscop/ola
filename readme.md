@@ -150,9 +150,7 @@ Every time it is read, it'll calculate it based in the current time. So there's 
 
 ## Smooth interpolation
 
-If you use other libraries like TWEEN and try to update a value **while the previous transition is still ongoing** you are going to have a hard time.
-
-We are taking the position derivative at x_i for the new curve so any update happen smoothly:
+If you use other libraries like TWEEN and try to update a value **while the previous transition is still ongoing** you are going to have a hard time. We are taking the position derivative (speed) at the update time so they happen smoothly:
 
 <table>
   <tr>
