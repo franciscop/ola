@@ -157,7 +157,7 @@ When updating a value **while another transition is occurring**, the naive inter
   </tr>
   <tr>
     <td>
-      Naive implementation of the curve
+      Naive implementation with corners
     </td>
     <td>
       Smooth interpolation with Ola()
