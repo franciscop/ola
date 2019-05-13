@@ -36,7 +36,7 @@ setInterval(() => {
 }, 10);
 ```
 
-It will work great with one or many instances since they are independent:
+Also works great with many instances since they are independent:
 
 <a href="https://jsfiddle.net/franciscop/7b3wqo91/">
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/dots.gif">
@@ -46,10 +46,10 @@ It will work great with one or many instances since they are independent:
 // Many instances work flawlessly
 const dots = Array(1000).fill().map(() => Ola(0));
 
-// Write all the dots every second
+// Set the size to update every 600ms
 setInterval(() => dots.forEach(dot => {
-  dot.set(Math.random());
-}), 1000);
+  dot.value = Math.random();
+}), 600);
 
 // ... update screen here
 ```
