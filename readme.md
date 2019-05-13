@@ -51,10 +51,13 @@ for (let i = 0; i <= 100; i++) {
   dots.push(Ola(0));
 }
 
-// Update a random index randomly
-setTimeout(() => {
-  dots[rand(0, 100)].value = rand();
-}, 100);
+setTimeout(
+  () =>
+    dots.forEach(dot => {
+      dot.set(Math.random());
+    }),
+  100
+);
 ```
 
 > Tip: click on the GIFs for a live demo with the code :)
