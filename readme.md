@@ -51,13 +51,9 @@ for (let i = 0; i <= 100; i++) {
   dots.push(Ola(0));
 }
 
-setTimeout(
-  () =>
-    dots.forEach(dot => {
-      dot.set(Math.random());
-    }),
-  100
-);
+setTimeout(() => dots.forEach(dot => {
+  dot.set(Math.random());
+}), 100);
 ```
 
 > Tip: click on the GIFs for a live demo with the code :)
@@ -95,7 +91,7 @@ There are three distinct operations that can be run: creating an instance, setti
 ### Create an instance
 
 ```js
-Ola(initial_value, (time = 300));
+Ola(initial_value, time = 300);
 ```
 
 The first parameter is the initial value. It can be either a single number, or an object of `key:numbers`:
