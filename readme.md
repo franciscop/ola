@@ -10,7 +10,7 @@ Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetw
 // Initialize it to 0
 const temp = Ola(0);
 
-// Set the value randomly (async)
+// Set the value to update async
 temp.set(100);
 
 // Log the values from 0 to 100
