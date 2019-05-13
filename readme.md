@@ -27,9 +27,11 @@ It works with multiple values/dimensions:
 
 ```js
 const pos = Ola({ left: 0, y: 0 });
+
 window.addEventListener('click', e => {
   pos.set({ x: e.pageX, y: e.pageY });
 });
+
 setInterval(() => {
   ball.style.left = `${pos.x}px`;
   ball.style.top = `${pos.y}px`;
@@ -44,10 +46,7 @@ It will work great with one or many instances since they are independent:
 
 ```js
 // Many instances work flawlessly
-const dots = [];
-for (let i = 0; i <= 100; i++) {
-  dots.push(Ola(0));
-}
+const dots = Array(1000).fill().map(() => Ola(0));
 
 // Write all the dots every second
 setInterval(() => dots.forEach(dot => {
