@@ -27,13 +27,12 @@ It works with multiple values/dimensions:
 
 ```js
 const pos = Ola({ left: 0, y: 0 });
-
-window.addEventListener('mousemove', e => {
+window.addEventListener('click', e => {
   pos.set({ x: e.pageX, y: e.pageY });
 });
-
 setInterval(() => {
-  ball.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+  ball.style.left = `${pos.x}px`;
+  ball.style.top = `${pos.y}px`;
 }, 10);
 ```
 
