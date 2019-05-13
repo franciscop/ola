@@ -27,18 +27,12 @@ It works with multiple values/dimensions:
 </a>
 
 ```js
-
-// Initial value for the position; center of the container
-const pos = Ola({ x: 100, y: 100 });
-
-// Read the position as fast as the CPU allows
+const pos = Ola({ left: 0, y: 0 });
 (function tick() {
-  ball.style.transform = `
-    translate(${pos.x}px, ${pos.y}px)
-  `;
+  ball.left = pos.x;
+  ball.top = pos.y;
   requestAnimationFrame(tick);
 })();
-
 window.addEventListener('mousemove', e => {
   pos.set({ x: e.pageX, y: e.pageY });
 });
