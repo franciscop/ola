@@ -22,22 +22,26 @@ temp.set(100);
 
 It works with multiple values/dimensions:
 
-<a href="https://jsfiddle.net/franciscop/oLw01smr/">
+<a href="https://jsfiddle.net/franciscop/jsfv13no/">
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/ball.gif">
 </a>
 
 ```js
-const pos = Ola({ x: 0, y: 0 });
 
-// Some good 'ol jquery syntax
-$panel.on('click', e => pos.set({
-  x: e.clientX, y: e.clientY
-}));
+// Initial value for the position; center of the container
+const pos = Ola({ x: 100, y: 100 });
 
-(function tick () {
-  // ... update screen here
+// Read the position as fast as the CPU allows
+(function tick() {
+  ball.style.transform = `
+    translate(${pos.x}px, ${pos.y}px)
+  `;
   requestAnimationFrame(tick);
 })();
+
+window.addEventListener('mousemove', e => {
+  pos.set({ x: e.pageX, y: e.pageY });
+});
 ```
 
 It will work great with one or many instances since they are independent:
