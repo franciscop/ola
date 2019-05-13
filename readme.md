@@ -1,6 +1,6 @@
 # Ola
 
-Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](<https://en.wikipedia.org/wiki/Interpolation_(computer_graphics) numbers:
+Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics) numbers:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
