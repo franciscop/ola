@@ -8,15 +8,13 @@ Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetw
 
 ```js
 // Start tracking the value
-const temp = Ola(0);
+const temp = Ola({ y: 0 });
 
 // Set the value to update async
-temp.set(100);
+temp.set({ y: 100 });
 
-// Print the value quickly
-setInterval(() => {
-  console.log(temp.value);
-}, 10);
+// Read the evolution over time
+setInterval(() => graph(temp.y), 10);
 ```
 
 It works with multiple values/dimensions:
