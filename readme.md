@@ -3,14 +3,14 @@
 Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](<https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)>) numbers:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
-  <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
+  <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
 </a>
 
 ```js
 // Initialize it to 0
 const temp = Ola(0);
 
-// Set the value randomly (async)
+// Set the value to update async
 temp.set(100);
 
 // Log the values from 0 to 100
@@ -22,7 +22,7 @@ setInterval(() => {
 It works with multiple values/dimensions:
 
 <a href="https://jsfiddle.net/franciscop/oLw01smr/">
-  <img align="right" width="375" height="180" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/ball.gif">
+  <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/ball.gif">
 </a>
 
 ```js
@@ -37,6 +37,12 @@ setInterval(() => {
   console.log(pos.x, pos.y);
 }, 10);
 ```
+
+<a href="https://jsfiddle.net/franciscop/7b3wqo91/">
+  <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/dots.gif">
+</a>
+
+It is also optimized for continuous usage and performance, making only the minimally needed updates and no more.
 
 > Tip: click on the GIFs for a live demo with the code :)
 
