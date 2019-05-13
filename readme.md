@@ -38,6 +38,8 @@ setInterval(() => {
 }, 10);
 ```
 
+It will work great with one or many instances since they are independent:
+
 <a href="https://jsfiddle.net/franciscop/7b3wqo91/">
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/dots.gif">
 </a>
