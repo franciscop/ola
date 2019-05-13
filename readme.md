@@ -1,22 +1,23 @@
 # Ola
 
-Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](<https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)>) numbers:
+Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](<https://en.wikipedia.org/wiki/Interpolation_(computer_graphics) numbers:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
 </a>
 
 ```js
-// Initialize it to 0
+// Start tracking the value
 const temp = Ola(0);
 
 // Set the value to update async
 temp.set(100);
 
-// Log the values from 0 to 100
-setInterval(() => {
+// Update as fast as possible
+(function tick () {
   console.log(temp.value);
-}, 10);
+  requestAnimationFrame(tick);
+})();
 ```
 
 It works with multiple values/dimensions:
@@ -26,16 +27,17 @@ It works with multiple values/dimensions:
 </a>
 
 ```js
-// Initialize it to origin
 const pos = Ola({ x: 0, y: 0 });
 
-panel.on('click', e => pos.set({
+// Some good 'ol jquery syntax
+$panel.on('click', e => pos.set({
   x: e.clientX, y: e.clientY
 }));
 
-requestAnimationFrame(function tick () {
-  // Update screen here
-});
+(function tick () {
+  // ... update screen here
+  requestAnimationFrame(tick);
+})();
 ```
 
 It will work great with one or many instances since they are independent:
@@ -51,9 +53,12 @@ for (let i = 0; i <= 100; i++) {
   dots.push(Ola(0));
 }
 
-setTimeout(() => dots.forEach(dot => {
+// Update all the dots every second
+setInterval(() => dots.forEach(dot => {
   dot.set(Math.random());
-}), 100);
+}), 300);
+
+// Update screen
 ```
 
 > Tip: click on the GIFs for a live demo with the code :)
@@ -97,8 +102,8 @@ Ola(initial_value, time = 300);
 The first parameter is the initial value. It can be either a single number, or an object of `key:numbers`:
 
 ```js
-const heater = Ola(20); // Alias of `{ value: 0 }`
-const motor = Ola({ angle: 180 }); // A named object for convenience
+const heater = Ola(20); // Alias of `{ value: 20 }`
+const motor = Ola({ angle: 180 }); // A named parameter for clarity
 const position = Ola({ x: 0, y: 0 }); // Any number of properties
 ```
 
@@ -121,7 +126,7 @@ console.log(Ola(0.001));
 console.log(Ola(1 / 100));
 ```
 
-The time it takes to update can also be updated while setting the value:
+The time it takes to update can also be updated while setting the value, which will update it for any subsequent transition:
 
 ```js
 // All `pos.set()` will take 1 full second
@@ -133,7 +138,7 @@ pos.set({ x: 100 }, 3000);
 
 ```js
 heater.value = 25; // Since the constructor used a number, use `.value`
-motor.angle = 90; // Turn -90 degrees
+motor.angle = 90; // Turn -90 degrees from before
 position.set({ x: 100, y: 100 }); // Move 0,0 => 100,100
 ```
 
