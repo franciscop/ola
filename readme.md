@@ -13,11 +13,10 @@ const temp = Ola(0);
 // Set the value to update async
 temp.set(100);
 
-// Update as fast as possible
-(function tick () {
+// Print the value quickly
+setInterval(() => {
   console.log(temp.value);
-  requestAnimationFrame(tick);
-})();
+}, 10);
 ```
 
 It works with multiple values/dimensions:
@@ -28,14 +27,14 @@ It works with multiple values/dimensions:
 
 ```js
 const pos = Ola({ left: 0, y: 0 });
-(function tick() {
-  ball.left = pos.x;
-  ball.top = pos.y;
-  requestAnimationFrame(tick);
-})();
+
 window.addEventListener('mousemove', e => {
   pos.set({ x: e.pageX, y: e.pageY });
 });
+
+setInterval(() => {
+  ball.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+}, 10);
 ```
 
 It will work great with one or many instances since they are independent:
@@ -51,12 +50,12 @@ for (let i = 0; i <= 100; i++) {
   dots.push(Ola(0));
 }
 
-// Update all the dots every second
+// Write all the dots every second
 setInterval(() => dots.forEach(dot => {
   dot.set(Math.random());
-}), 300);
+}), 1000);
 
-// Update screen
+// ... update screen here
 ```
 
 > Tip: click on the GIFs for a live demo with the code :)
