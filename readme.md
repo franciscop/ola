@@ -42,7 +42,18 @@ setInterval(() => {
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/dots.gif">
 </a>
 
-It is also optimized for continuous usage and performance, making only the minimally needed updates and no more.
+```js
+// Many instances work flawlessly
+const dots = [];
+for (let i = 0; i <= 100; i++) {
+  dots.push(Ola(0));
+}
+
+// Update a random index randomly
+setTimeout(() => {
+  dots[rand(0, 100)].value = rand();
+}, 100);
+```
 
 > Tip: click on the GIFs for a live demo with the code :)
 
