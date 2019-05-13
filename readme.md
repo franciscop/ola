@@ -29,13 +29,13 @@ It works with multiple values/dimensions:
 // Initialize it to origin
 const pos = Ola({ x: 0, y: 0 });
 
-// Set both values to 100 (async)
-pos.set({ x: 100, y: 100 });
+panel.on('click', e => pos.set({
+  x: e.clientX, y: e.clientY
+}));
 
-// Log how the values evolve
-setInterval(() => {
-  console.log(pos.x, pos.y);
-}, 10);
+requestAnimationFrame(function tick () {
+  // Update screen here
+});
 ```
 
 It will work great with one or many instances since they are independent:
