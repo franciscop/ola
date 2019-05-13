@@ -1,7 +1,7 @@
 {
   "name": "ola",
   "version": "0.4.0",
-  "description": "Smooth animation library for inbetweening numbers in Javascript",
+  "description": "Smooth animation library for interpolating numbers in real time",
   "main": "ola.min.js",
   "scripts": {
     "build": "rollup ola.js --name Ola --output.format umd | uglifyjs -o ola.min.js",

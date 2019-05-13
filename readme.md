@@ -1,6 +1,6 @@
 # Ola
 
-Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)) numbers:
+Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)) numbers in realtime:
 
 <a href="https://jsfiddle.net/franciscop/oechmra8/">
   <img align="right" width="375" src="https://raw.githubusercontent.com/franciscop/ola/master/docs/line.gif">
@@ -8,13 +8,13 @@ Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetw
 
 ```js
 // Start tracking the value
-const temp = Ola({ y: 0 });
+const pos = Ola({ y: 0 });
 
 // Set the value to update async
-temp.set({ y: 100 });
+pos.set({ y: 100 });
 
 // Read the evolution over time
-setInterval(() => graph(temp.y), 10);
+setInterval(() => graph(pos.y), 10);
 ```
 
 It works with multiple values/dimensions:
@@ -24,7 +24,7 @@ It works with multiple values/dimensions:
 </a>
 
 ```js
-const pos = Ola({ left: 0, y: 0 });
+const pos = Ola({ x: 0, y: 0 });
 
 window.addEventListener('click', e => {
   pos.set({ x: e.pageX, y: e.pageY });
@@ -43,15 +43,15 @@ Also works great with many instances since they are independent:
 </a>
 
 ```js
-// Many instances work flawlessly
+// Generates 1000 instances seamlessly
 const dots = Array(1000).fill().map(() => Ola(0));
 
-// Set the size to update every 600ms
+// Everything updates every 600ms
 setInterval(() => dots.forEach(dot => {
   dot.value = Math.random();
 }), 600);
 
-// ... update screen here
+// ... read + paint screen here
 ```
 
 > Tip: click on the GIFs for a live demo with the code :)
@@ -187,9 +187,9 @@ In contrast to other libraries, there's no need to tick/update the function ever
 
 While there are some other great libraries like Tween, this one has some improvements:
 
-### Smooth interpolation
+### Smooth in realtime
 
-With other libraries when updating a value **while the previous transition is still ongoing** you are going to have a hard time. We are taking the position derivative (speed) at the update time so they happen smoothly:
+Other libraries don't move smoothly when there's an update **while the previous transition is still ongoing**. Ola makes sure there are no harsh corners:
 
 <table>
   <tr>
@@ -205,7 +205,7 @@ With other libraries when updating a value **while the previous transition is st
       Smooth interpolation <strong>with Ola()</strong>
     </td>
     <td>
-      Broken interpolation <strong>with Tweenmax</strong>
+      Harsh interpolation <strong>with Tweenmax</strong>
     </td>
   </tr>
 </table>
@@ -213,8 +213,8 @@ With other libraries when updating a value **while the previous transition is st
 Status of libraries updating animation mid-way:
 
 - **Ola.js** - working smoothly, see screenshot above.
-- **TweenMax** - Supported natively, but the transition is. See screenshot above.
-- **Tween.js** - Proposed API, but not implemented: https://github.com/tweenjs/tween.js/issues/257
+- **TweenMax** - harsh transition. See screenshot above.
+- **Tween.js** - no transitions at all, feature request made in 2016: https://github.com/tweenjs/tween.js/issues/257
 - [**Open an Issue**](https://github.com/franciscop/ola/issues/new) with other libraries that you know.
 
 ### Lazy loading
@@ -227,4 +227,4 @@ position.x = 10; // Only updates X
 console.log(position.x); // Calculates only X position, not y
 ```
 
-Not only this is great for performance, but it also makes for a clean self-contained API where each instance is independent.
+Not only this is great for performance, but it also makes for a clean self-contained API where each instance is independent and portable.
