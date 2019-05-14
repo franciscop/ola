@@ -89,7 +89,7 @@ There are three distinct operations that can be run: creating an instance, setti
 ### Create an instance
 
 ```js
-Ola(initial_value, time = 300);
+Ola(initial, time = 300);
 ```
 
 The first parameter is the initial value. It can be either a single number, or an object of `key:numbers`:

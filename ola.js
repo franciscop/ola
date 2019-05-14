@@ -17,6 +17,12 @@ const speed = (x0, v0, t1, t) => {
   return 3 * a * t ** 2 + 2 * b * t + c;
 };
 
+// Loop it in different ways
+const each = function(values, cb) {
+  const multi = typeof values === "number" ? { value: values } : values;
+  Object.entries(multi).map(([key, value]) => cb(value, key));
+};
+
 // Handle a single dimension
 function Single(init, time) {
   this.start = new Date() / 1000;
@@ -57,21 +63,32 @@ Single.prototype.set = function(value, time) {
 
 // The multidimensional constructor, makes a { value: init } if it's 1D
 function Ola(values, time = 300) {
-  if (!(this instanceof Ola)) {
-    return new Ola(values, time);
+  // This is just an alias
+  if (typeof values === "number") {
+    values = { value: values };
   }
 
+  // It's already an instance, nothing to do
+  if (this instanceof Ola) return this;
+
+  // Initialize it so that we have access to the prototype
+  const self = new Ola(values, time);
+
   // Loop over the first argument
-  this.each(values, (init, key) => {
+  each(values, (init, key) => {
     const value = new Single(init, time / 1000);
     // But we are not interested in it; instead, set it as a ghost
-    Object.defineProperty(this, "_" + key, { value });
-    Object.defineProperty(this, key, {
+    Object.defineProperty(values, "_" + key, { value });
+    Object.defineProperty(values, key, {
       get: () => value.get(), // pos.x
       set: val => value.set(val), // pos.x = 10
       enumerable: true
     });
   });
+
+  // Set it only after all those `Object.defineProperty()`
+  Object.setPrototypeOf(values, Ola.prototype);
+  return values;
 }
 
 // pos.get('x')
@@ -82,15 +99,10 @@ Ola.prototype.get = function(name = "value") {
 // pos.set(10)
 // pos.set({ x: 10 })
 // pos.set({ x: 10 }, time)
-Ola.prototype.set = function(values, time) {
-  this.each(values, (value, key) => {
-    this["_" + key].set(value, time);
+Ola.prototype.set = function(values, time = 0) {
+  each(values, (value, key) => {
+    this["_" + key].set(value, time / 1000);
   });
-};
-
-Ola.prototype.each = function(values, cb) {
-  const multi = typeof values === "number" ? { value: values } : values;
-  Object.entries(multi).map(([key, value]) => cb(value, key));
 };
 
 export default Ola;
