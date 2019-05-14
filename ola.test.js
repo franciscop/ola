@@ -220,4 +220,13 @@ describe("Ola([0])", () => {
     expect(pos).toEqual([0, 10, 100]);
     expect(JSON.stringify(pos)).toBe("[0,10,100]");
   });
+
+  it("can update multiple values", async () => {
+    const pos = Ola(Array(3).fill(0));
+    pos.set([0, 10, 100]);
+    await delay();
+
+    expect(pos).toEqual([0, 10, 100]);
+    expect(JSON.stringify(pos)).toBe("[0,10,100]");
+  });
 });
