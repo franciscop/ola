@@ -1,6 +1,6 @@
 import Ola from "./ola";
 
-const delay = (time = 300) => new Promise(done => setTimeout(done, time));
+const delay = (time = 400) => new Promise(done => setTimeout(done, time));
 
 // 10% of approximation by default
 expect.extend({
