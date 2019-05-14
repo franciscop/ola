@@ -1,4 +1,4 @@
-# Ola · [![gzip size](https://img.badgesize.io/franciscop/ola/master/ola.min.js.svg?compression=gzip&label=size)](https://github.com/franciscop/ola/blob/master/ola.min.js) [![test status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/franciscop/ola?logo=none&label=test)](https://github.com/franciscop/ola/actions) [![npm install ola](https://img.shields.io/badge/npm%20install-ola-blue.svg)](https://www.npmjs.com/package/ola)
+# Ola 　 [![gzip size](https://img.badgesize.io/franciscop/ola/master/ola.min.js.svg?compression=gzip&label=size)](https://github.com/franciscop/ola/blob/master/ola.min.js) [![test status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/franciscop/ola?logo=none&label=test)](https://github.com/franciscop/ola/actions) [![npm install ola](https://img.shields.io/badge/npm%20install-ola-blue.svg)](https://www.npmjs.com/package/ola)
 
 Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)) numbers in realtime:
 
