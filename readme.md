@@ -1,4 +1,4 @@
-# Ola
+# Ola [![npm install files](https://img.shields.io/badge/npm%20install-ola-blue.svg)](https://www.npmjs.com/package/ola) [![gzip size](https://img.badgesize.io/franciscop/ola/master/ola.min.js.svg?compression=gzip)](https://github.com/franciscop/fetch/blob/master/ola.min.js)
 
 Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)) numbers in realtime:
 
