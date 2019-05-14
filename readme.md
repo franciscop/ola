@@ -44,7 +44,7 @@ Also works great with many instances since they are independent:
 
 ```js
 // Generates 1000 instances seamlessly
-const dots = Array(1000).fill().map(() => Ola(0));
+const dots = Ola(Array(1000).fill(0));
 
 // Everything updates every 600ms
 setInterval(() => dots.forEach(dot => {
