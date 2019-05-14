@@ -92,20 +92,22 @@ There are three distinct operations that can be run: creating an instance, setti
 Ola(initial, time = 300);
 ```
 
-The first parameter is the initial value. It can be either a single number, or an object of `key:numbers`:
+The first parameter is the initial value. It can be either a single number, or an object of `key:numbers` or an array of numbers:
 
 ```js
 const heater = Ola(20); // Alias of `{ value: 20 }`
 const motor = Ola({ angle: 180 }); // A named parameter for clarity
 const position = Ola({ x: 0, y: 0 }); // Any number of properties
+const heights = Ola([0, 0, 0, 0]); // A group of heights
 ```
 
 The second parameter is how long the transition will last. It should be a number that represents the time in milliseconds:
 
 ```js
-const heater = Ola(20, 300); // Default = 300 ms
+const heater = Ola(20); // Default = 300 ms
 const motor = Ola({ angle: 180 }, 1000); // Turn the motor slowly
-const position = Ola({ x: 0, y: 0 }, 100); // Very quick movements
+const position = Ola({ x: 0, y: 0 }, 100); // Quick movements for the position
+const heights = Ola([0, 0, 0, 0], 300); // 300, same as the default
 ```
 
 Passing a single number as a parameter is the same as passing `{ value: num }`, we are just helping by setting a shortname. It is offered for convenience, but recommend not mixing both styles in the same project.
@@ -133,6 +135,7 @@ pos.set({ x: 100 }, 3000);
 heater.value = 25; // Since the constructor used a number, use `.value`
 motor.angle = 90; // Turn -90 degrees from before
 position.set({ x: 100, y: 100 }); // Move 0,0 => 100,100
+heights[1] = 120; // Move the second (0-index) item to 120
 ```
 
 When we update a property **it is not updated instantaneously** (that's the whole point of this library), but instead it's set to update asynchronously:
@@ -167,6 +170,7 @@ You can see in this graph, the blue line is the value that is set though `.set()
 log(heater.value); // Since the constructor used a number, use `.value`
 log(motor.angle); // Read as an object property
 log(position.get("x")); // Find the X value
+log(heights[1]); // Move the first item to 120
 ```
 
 You can read the value at any time, and the value will be calculated at that moment in time:
