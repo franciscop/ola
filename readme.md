@@ -14,7 +14,7 @@ const pos = Ola({ y: 0 });
 pos.set({ y: 100 });
 
 // Read the evolution over time
-setInterval(() => graph(pos.y), 9);
+setInterval(() => graph(pos.y), 5);
 ```
 
 It works with multiple values/dimensions:
