@@ -5,7 +5,7 @@ const delay = (time = 400) => new Promise(done => setTimeout(done, time));
 // 10% of approximation by default
 expect.extend({
   toApproximate: (a, b, perc = 0.1) => {
-    const pass = Math.abs((a - b) / b) <= perc;
+    const pass = a === 0 || b === 0 ? a === b : Math.abs((a - b) / b) <= perc;
     return {
       pass,
       message: () => `"${a}" ${pass ? "should" : "does not"} approximate "${b}"`
@@ -16,6 +16,28 @@ expect.extend({
 describe("Ola", () => {
   it("is defined", () => {
     expect(Ola).toBeDefined();
+  });
+
+  it("can read the future", () => {
+    const pos = Ola(0);
+    pos.value = 100;
+    const now = new Date().getTime();
+    expect(Math.round(pos.get("value", now))).toBe(0);
+    expect(pos.get("value", now + 150)).toApproximate(50);
+    expect(pos.get("value", now + 400)).toApproximate(100);
+  });
+
+  it("cannot read the past", () => {
+    const pos = Ola(0);
+    const now = new Date().getTime();
+    expect(() => pos.get("value", now - 100)).toThrowError(/past/);
+  });
+
+  it("unfortunately has inconsistencies", async () => {
+    const pos = Ola(0);
+    const now = new Date().getTime();
+    await delay(200);
+    expect(() => pos.get("value", now)).not.toThrowError(/past/);
   });
 });
 
@@ -175,6 +197,35 @@ describe("Ola([0])", () => {
     expect(pos.get("0")).toBe(0);
     expect(pos).toEqual([0]);
     expect(JSON.stringify(pos)).toBe("[0]");
+  });
+
+  it("can loop it", async () => {
+    const pos = Ola([0, 0, 0]);
+    pos.forEach((val, i) => {
+      expect(val).toBe(0);
+      pos[i] = 100;
+    });
+
+    await delay();
+    pos.forEach(val => {
+      expect(val).toBe(100);
+    });
+  });
+
+  it("can create it from Array(N).fill(0)", async () => {
+    // Generates 1000 instances seamlessly
+    const dots = Ola(Array(1000).fill(0));
+
+    // Everything updates every 600ms
+    dots.forEach((dot, i) => {
+      expect(dot).toBe(0);
+      dots[i] = 100;
+    });
+
+    await delay();
+    dots.forEach(dot => {
+      expect(dot).toBe(100);
+    });
   });
 
   it("can update the value", async () => {

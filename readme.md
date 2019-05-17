@@ -47,9 +47,11 @@ Also works great with many instances since they are independent:
 const dots = Ola(Array(1000).fill(0));
 
 // Everything updates every 600ms
-setInterval(() => dots.forEach(dot => {
-  dot.value = Math.random();
-}), 600);
+setInterval(() => {
+  dots.forEach((dot, i) => {
+    dots[i] = Math.random();
+  });
+}, 600);
 
 // ... read + paint screen here
 ```

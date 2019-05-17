@@ -33,16 +33,19 @@ function Single(init, time) {
   this.speed = 0;
 }
 
-Single.prototype.get = function() {
-  const t = new Date() / 1000 - this.start;
+Single.prototype.get = function(now) {
+  const t = now / 1000 - this.start;
+  if (t < 0) {
+    throw new Error("Cannot read in the past");
+  }
   if (t >= this.time) {
     return this.to;
   }
   return this.to - position(this.to - this.from, this.speed, this.time, t);
 };
 
-Single.prototype.getSpeed = function() {
-  const t = new Date() / 1000 - this.start;
+Single.prototype.getSpeed = function(now) {
+  const t = now / 1000 - this.start;
   if (t >= this.time) {
     return 0;
   }
@@ -50,9 +53,10 @@ Single.prototype.getSpeed = function() {
 };
 
 Single.prototype.set = function(value, time) {
-  const current = this.get();
-  this.speed = this.getSpeed();
-  this.start = new Date() / 1000;
+  const now = new Date();
+  const current = this.get(now);
+  this.speed = this.getSpeed(now);
+  this.start = now / 1000;
   this.from = current;
   this.to = value;
   if (time) {
@@ -68,41 +72,40 @@ function Ola(values, time = 300) {
     values = { value: values };
   }
 
-  // It's already an instance, nothing to do
-  if (this instanceof Ola) return this;
-
-  // Initialize it so that we have access to the prototype
-  const self = new Ola(values, time);
-
   // Loop over the first argument
   each(values, (init, key) => {
     const value = new Single(init, time / 1000);
     // But we are not interested in it; instead, set it as a ghost
     Object.defineProperty(values, "_" + key, { value });
     Object.defineProperty(values, key, {
-      get: () => value.get(), // pos.x
+      get: () => value.get(new Date()), // pos.x
       set: val => value.set(val), // pos.x = 10
       enumerable: true
     });
   });
 
-  // Set it only after all those `Object.defineProperty()`
-  Object.setPrototypeOf(values, Ola.prototype);
+  // pos.get('x')
+  Object.defineProperty(values, "get", {
+    get: () =>
+      function(name = "value", now = new Date()) {
+        return this["_" + name].get(now);
+      }
+  });
+
+  // pos.set(10)
+  // pos.set({ x: 10 })
+  // pos.set({ x: 10 }, time)
+  Object.defineProperty(values, "set", {
+    get: () =>
+      function(values, time = 0) {
+        each(values, (value, key) => {
+          this["_" + key].set(value, time / 1000);
+        });
+      }
+  });
+
+  // So that you can use the original methods
   return values;
 }
-
-// pos.get('x')
-Ola.prototype.get = function(name = "value") {
-  return this[name];
-};
-
-// pos.set(10)
-// pos.set({ x: 10 })
-// pos.set({ x: 10 }, time)
-Ola.prototype.set = function(values, time = 0) {
-  each(values, (value, key) => {
-    this["_" + key].set(value, time / 1000);
-  });
-};
 
 export default Ola;

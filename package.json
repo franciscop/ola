@@ -7,7 +7,8 @@
     "build": "rollup ola.js --name Ola --output.format umd | uglifyjs -o ola.min.js",
     "ugly": "uglifyjs --version",
     "test": "jest --coverage",
-    "size": "echo \"$(gzip -c ola.min.js | wc -c) bytes\" # Only for Unix"
+    "size": "echo \"$(gzip -c ola.min.js | wc -c) bytes\" # Only for Unix",
+    "watch": "jest --watch"
   },
   "keywords": [
     "value",
