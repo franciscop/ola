@@ -1,4 +1,4 @@
-# Ola &nbsp; [![test status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/franciscop/ola?label=test&logo=none&bust=3)](https://github.com/franciscop/ola/actions) [![gzip size](https://img.badgesize.io/franciscop/ola/master/ola.min.js.svg?compression=gzip&label=size)](https://github.com/franciscop/ola/blob/master/ola.min.js) [![dependencies](https://img.shields.io/david/franciscop/ola.svg)](https://github.com/franciscop/ola/blob/master/package.json) [![npm install ola](https://img.shields.io/badge/npm%20install-ola-blue.svg)](https://www.npmjs.com/package/ola)
+# Ola &nbsp; [![test status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/franciscop/ola?label=test&logo=none&bust=3)](https://github.com/franciscop/ola/blob/master/.github/main.workflow) [![gzip size](https://img.badgesize.io/franciscop/ola/master/ola.min.js.svg?compression=gzip&label=size)](https://github.com/franciscop/ola/blob/master/ola.min.js) [![dependencies](https://img.shields.io/david/franciscop/ola.svg)](https://github.com/franciscop/ola/blob/master/package.json) [![npm install ola](https://img.shields.io/badge/npm%20install-ola-blue.svg)](https://www.npmjs.com/package/ola)
 
 Smooth animation library for [inbetweening](https://en.wikipedia.org/wiki/Inbetweening) / [interpolating](https://en.wikipedia.org/wiki/Interpolation_(computer_graphics)) numbers in realtime:
 
@@ -232,3 +232,10 @@ console.log(position.x); // Calculates only X position, not y
 ```
 
 Not only this is great for performance, but it also makes for a clean self-contained API where each instance is independent and portable.
+
+## Others from Author
+
+Like this project? Francisco has many more! Check them out:
+
+- **[server.js](https://serverjs.io/)** - a batteries-included Node.js server
+- **[translate.js](https://github.com/franciscop/translate)** - to easily translate text on the browser and Node.js
