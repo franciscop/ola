@@ -232,3 +232,10 @@ console.log(position.x); // Calculates only X position, not y
 ```
 
 Not only this is great for performance, but it also makes for a clean self-contained API where each instance is independent and portable.
+
+## Others from Author
+
+Like this project? Francisco has many more! Check them out:
+
+- **[server.js](https://serverjs.io/)** - a batteries-included Node.js server
+- **[translate.js](https://github.com/franciscop/translate)** - to easily translate text on the browser and Node.js
