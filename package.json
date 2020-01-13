@@ -2,7 +2,12 @@
   "name": "ola",
   "version": "1.1.0",
   "description": "Smooth animation library for interpolating numbers in real time",
-  "main": "ola.min.js",
+  "homepage": "https://github.com/franciscop/ola#readme",
+  "repository": "https://github.com/franciscop/ola.git",
+  "bugs": "https://github.com/franciscop/ola/issues",
+  "funding": "https://www.paypal.me/franciscopresencia/19",
+  "author": "Francisco Presencia <public@francisco.io> (https://francisco.io/)",
+  "license": "MIT",
   "scripts": {
     "build": "rollup ola.js --name Ola --output.format umd | uglifyjs -o ola.min.js",
     "ugly": "uglifyjs --version",
@@ -20,13 +25,8 @@
     "tween",
     "js"
   ],
-  "author": "Francisco Presencia <public@francisco.io> (https://francisco.io/)",
-  "license": "MIT",
+  "main": "ola.min.js",
   "files": [],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/franciscop/ola"
-  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.4.4",
