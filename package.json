@@ -1,6 +1,6 @@
 {
   "name": "ola",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Smooth animation library for interpolating numbers in real time",
   "homepage": "https://github.com/franciscop/ola#readme",
   "repository": "https://github.com/franciscop/ola.git",
