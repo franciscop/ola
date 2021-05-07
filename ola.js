@@ -77,7 +77,7 @@ function Ola(values, time = 300) {
     const value = new Single(init, time / 1000);
     // But we are not interested in it; instead, set it as a ghost
     Object.defineProperty(values, "_" + key, { value });   // pos._x.to, pos._x.speed, ...
-    Object.defineProperty(values, "$" + key, { value: value.to });   // pos.$x
+    Object.defineProperty(values, "$" + key, { get: () => value.to });   // pos.$x
     Object.defineProperty(values, key, {
       get: () => value.get(new Date()), // pos.x
       set: val => value.set(val), // pos.x = 10
