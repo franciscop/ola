@@ -187,6 +187,20 @@ setInterval(() => {
 
 In contrast to other libraries, there's no need to tick/update the function every N ms or before reading the value, since `Ola()` uses math functions you should just read it when needed.
 
+## Advanced usage
+
+If you need to access more advanced features, you can read these two properties:
+
+```js
+// All the details about the current transition, please see the source for more info
+log(heater._value);  // { to: 25, from: 20, ... }
+log(motor._angle);  // { to: 90, from: 180, ... }
+
+// The value that will be set when the transition is finished
+log(heater.$value);  // 25
+log(motor.$angle);  // 90
+```
+
 ## Features
 
 While there are some other great libraries like Tween, this one has some improvements:
