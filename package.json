@@ -1,11 +1,13 @@
 {
   "name": "ola",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Smooth animation library for interpolating numbers in real time",
   "homepage": "https://github.com/franciscop/ola#readme",
   "repository": "https://github.com/franciscop/ola.git",
   "bugs": "https://github.com/franciscop/ola/issues",
-  "funding": "https://www.paypal.me/franciscopresencia/19",
+  "funding": {
+    "url": "https://www.paypal.me/franciscopresencia/19"
+  },
   "author": "Francisco Presencia <public@francisco.io> (https://francisco.io/)",
   "license": "MIT",
   "scripts": {
