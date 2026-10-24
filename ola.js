@@ -17,7 +17,7 @@ const speed = (x0, v0, t1, t) => {
 };
 
 // Loop it in different ways
-const each = function(values, cb) {
+const each = function (values, cb) {
   const multi = typeof values === "number" ? { value: values } : values;
   Object.entries(multi).map(([key, value]) => cb(value, key));
 };
@@ -32,7 +32,7 @@ function Single(init, time) {
   this.speed = 0;
 }
 
-Single.prototype.get = function(now) {
+Single.prototype.get = function (now) {
   const t = now / 1000 - this.start;
   if (t < 0) {
     throw new Error("Cannot read in the past");
@@ -43,7 +43,7 @@ Single.prototype.get = function(now) {
   return this.to - position(this.to - this.from, this.speed, this.time, t);
 };
 
-Single.prototype.getSpeed = function(now) {
+Single.prototype.getSpeed = function (now) {
   const t = now / 1000 - this.start;
   if (t >= this.time) {
     return 0;
@@ -51,7 +51,7 @@ Single.prototype.getSpeed = function(now) {
   return speed(this.to - this.from, this.speed, this.time, t);
 };
 
-Single.prototype.set = function(value, time) {
+Single.prototype.set = function (value, time) {
   const now = new Date();
   const current = this.get(now);
   this.speed = this.getSpeed(now);
@@ -75,21 +75,23 @@ function Ola(values, time = 300) {
   each(values, (init, key) => {
     const value = new Single(init, time / 1000);
     // But we are not interested in it; instead, set it as a ghost
-    Object.defineProperty(values, "_" + key, { value });   // pos._x.to, pos._x.speed, ...
-    Object.defineProperty(values, "$" + key, { get: () => value.to });   // pos.$x
+    Object.defineProperty(values, "_" + key, { value }); // pos._x.to, pos._x.speed, ...
+    Object.defineProperty(values, "$" + key, { get: () => value.to }); // pos.$x
     Object.defineProperty(values, key, {
       get: () => value.get(new Date()), // pos.x
-      set: val => { value.set(val); }, // pos.x = 10
-      enumerable: true
+      set: (val) => {
+        value.set(val);
+      }, // pos.x = 10
+      enumerable: true,
     });
   });
 
   // pos.get('x')
   Object.defineProperty(values, "get", {
     get: () =>
-      function(name = "value", now = new Date()) {
+      function (name = "value", now = new Date()) {
         return this["_" + name].get(now);
-      }
+      },
   });
 
   // pos.set(10)
@@ -97,11 +99,11 @@ function Ola(values, time = 300) {
   // pos.set({ x: 10 }, time)
   Object.defineProperty(values, "set", {
     get: () =>
-      function(values, time = 0) {
+      function (values, time = 0) {
         each(values, (value, key) => {
           this["_" + key].set(value, time / 1000);
         });
-      }
+      },
   });
 
   // So that you can use the original methods
