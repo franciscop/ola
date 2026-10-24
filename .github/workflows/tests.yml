@@ -2,6 +2,7 @@ name: tests
 
 on:
   push:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 1 1 *'  # Runs every January 1st at 00:00 UTC
 
@@ -9,19 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x]
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: install dependencies
-      run: npm install
-    - name: npm test
-      run: npm test
-      env:
-        CI: true
+      - uses: actions/checkout@v6
+      - name: Install dependencies
+        run: npm install
+      - name: Run the linter
+        run: npm run lint
+      - name: Run the tests
+        run: npm test
+        env:
+          CI: true

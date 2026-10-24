@@ -13,7 +13,6 @@ const speed = (x0, v0, t1, t) => {
   const a = (v0 * t1 + 2 * x0) / t1 ** 3;
   const b = -(2 * v0 * t1 + 3 * x0) / t1 ** 2;
   const c = v0;
-  const d = x0;
   return 3 * a * t ** 2 + 2 * b * t + c;
 };
 
@@ -80,7 +79,7 @@ function Ola(values, time = 300) {
     Object.defineProperty(values, "$" + key, { get: () => value.to });   // pos.$x
     Object.defineProperty(values, key, {
       get: () => value.get(new Date()), // pos.x
-      set: val => value.set(val), // pos.x = 10
+      set: val => { value.set(val); }, // pos.x = 10
       enumerable: true
     });
   });
